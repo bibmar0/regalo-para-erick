@@ -1,0 +1,763 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+
+    overflow: hidden;
+
+    background: #05000d;
+
+    color: white;
+}
+
+
+/* =========================
+   PANTALLAS
+========================= */
+
+.pantalla {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: none;
+
+    overflow-y: auto;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease;
+}
+
+.pantalla.activa {
+    display: flex;
+
+    opacity: 1;
+}
+
+
+/* =========================
+   GALAXIA
+========================= */
+
+.galaxia {
+    position: relative;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #24104a 0%,
+            #100321 38%,
+            #05000d 75%,
+            #010106 100%
+        );
+}
+
+.galaxia::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at 30% 50%,
+            rgba(119, 65, 220, .35),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 30%,
+            rgba(50, 100, 255, .25),
+            transparent 35%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+.estrellas {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.contenido {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(1000px, 92%);
+
+    margin: auto;
+
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+.pequeno {
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: .8;
+
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(
+        45px,
+        9vw,
+        90px
+    );
+
+    font-weight: normal;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 25px #a86cff,
+        0 0 50px #7d3cff;
+}
+
+h2 {
+    font-size: clamp(
+        28px,
+        5vw,
+        48px
+    );
+
+    font-weight: normal;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.3);
+}
+
+.dedicatoria {
+    font-size: 22px;
+
+    line-height: 1.7;
+
+    margin: 25px 0;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+button {
+    border: none;
+
+    padding: 15px 28px;
+
+    border-radius: 30px;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #ec4899
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(217,70,239,.45);
+
+    transition:
+        transform .3s,
+        box-shadow .3s;
+}
+
+button:hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 0 35px
+        rgba(217,70,239,.8);
+}
+
+
+/* =========================
+   HISTORIA
+========================= */
+
+.historia-contenido {
+    max-width: 1100px;
+}
+
+.cargador {
+    width: 80%;
+
+    margin: 35px auto 50px;
+
+    position: relative;
+}
+
+.linea {
+    width: 100%;
+
+    height: 5px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.25);
+
+    overflow: hidden;
+}
+
+.progreso {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8b5cf6,
+            #ec4899,
+            #60a5fa
+        );
+
+    transition:
+        width 5s linear;
+}
+
+.carrito {
+    position: relative;
+
+    width: fit-content;
+
+    font-size: 38px;
+
+    left: 0;
+
+    margin-bottom: 5px;
+
+    transition:
+        transform 5s linear;
+}
+
+
+/* =========================
+   FOTOS
+========================= */
+
+.galeria {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    max-width: 900px;
+
+    margin: 40px auto;
+}
+
+.galeria img {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+
+    opacity: 0;
+
+    transform:
+        scale(.7)
+        translateY(25px);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,.15);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.galeria img.mostrar {
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.frase-historia {
+    max-width: 700px;
+
+    margin: 35px auto;
+
+    font-size: 22px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   RAMO REALISTA
+========================= */
+
+.flores {
+    background:
+        radial-gradient(
+            circle at center,
+            #182c32,
+            #071014 70%
+        );
+}
+
+.ramo-realista {
+    width: min(
+        500px,
+        90vw
+    );
+
+    margin: 30px auto;
+
+    position: relative;
+
+    animation:
+        aparecerRamo 1.5s ease forwards;
+}
+
+.ramo-realista img {
+    width: 100%;
+
+    display: block;
+
+    border-radius: 20px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 15px 25px
+            rgba(0,0,0,.45)
+        );
+}
+
+@keyframes aparecerRamo {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.75)
+            translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.mensaje-flores {
+    max-width: 650px;
+
+    margin: auto;
+
+    font-size: 21px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   MENSAJE
+========================= */
+
+.mensaje-contenido {
+    max-width: 800px;
+}
+
+.carrito-grande {
+    font-size: 65px;
+
+    animation:
+        correr 3s
+        infinite
+        alternate
+        ease-in-out;
+}
+
+@keyframes correr {
+
+    from {
+        transform:
+            translateX(-150px);
+    }
+
+    to {
+        transform:
+            translateX(150px);
+    }
+}
+
+.carta {
+    padding: 35px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 0 35px
+        rgba(180,80,255,.15);
+
+    font-size: 19px;
+
+    line-height: 1.8;
+}
+
+.carta p {
+    margin-bottom: 18px;
+}
+
+.carta .grande {
+    color: #ff8bc7;
+
+    font-size: 30px;
+
+    text-shadow:
+        0 0 15px
+        #ff3b9d;
+}
+
+.corazones {
+    font-size: 30px;
+
+    animation:
+        latido 1.5s infinite;
+}
+
+@keyframes latido {
+
+    50% {
+        transform:
+            scale(1.12);
+    }
+}
+
+
+/* =========================
+   HOT WHEELS
+========================= */
+
+.carreras {
+    position: relative;
+
+    background:
+        linear-gradient(
+            #101010,
+            #181818
+        );
+}
+
+.pista-fondo {
+    position: absolute;
+
+    left: -5%;
+    right: -5%;
+
+    bottom: -5%;
+
+    height: 40%;
+
+    transform:
+        rotate(-3deg);
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #181818 0px,
+            #181818 28px,
+            #242424 29px,
+            #242424 56px
+        );
+
+    border-top:
+        5px solid
+        #444;
+}
+
+.pista-fondo::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 50%;
+
+    height: 5px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0px,
+            white 45px,
+            transparent 45px,
+            transparent 90px
+        );
+}
+
+.carreras-contenido {
+    max-width: 1100px;
+}
+
+.bandera {
+    font-size: 60px;
+
+    animation:
+        bandera 1s infinite alternate;
+}
+
+@keyframes bandera {
+
+    to {
+        transform:
+            rotate(-8deg);
+    }
+}
+
+.carreras h1 {
+    font-size:
+        clamp(
+            35px,
+            7vw,
+            75px
+        );
+
+    color: white;
+
+    text-shadow:
+        4px 4px 0 #e31b23,
+        8px 8px 0 #050505;
+}
+
+.subtitulo {
+    font-size: 22px;
+}
+
+.linea-meta {
+    width: 80%;
+
+    height: 7px;
+
+    margin: 25px auto;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0px,
+            white 30px,
+            #111 30px,
+            #111 60px
+        );
+}
+
+.carros {
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    max-width: 900px;
+
+    margin: 40px auto;
+}
+
+.carro {
+    padding: 10px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    cursor: pointer;
+
+    transition:
+        transform .4s,
+        box-shadow .4s;
+
+    animation:
+        entrarCarro .8s
+        ease both;
+}
+
+.carro:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.carro:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.carro:nth-child(4) {
+    animation-delay: .45s;
+}
+
+.carro:nth-child(5) {
+    animation-delay: .6s;
+}
+
+.carro:nth-child(6) {
+    animation-delay: .75s;
+}
+
+@keyframes entrarCarro {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-80px)
+            rotate(-5deg);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            rotate(0);
+    }
+}
+
+.carro:hover {
+    transform:
+        translateY(-15px)
+        rotate(-2deg);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,70,70,.5);
+}
+
+.carro img {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    display: block;
+}
+
+.final {
+    position: relative;
+
+    z-index: 5;
+
+    font-size: 24px;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 700px) {
+
+    .contenido {
+        padding:
+            35px 15px;
+    }
+
+    .galeria {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .carros {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .carta {
+        padding: 25px 18px;
+
+        font-size: 17px;
+    }
+
+    .carreras h1 {
+        font-size: 40px;
+    }
+
+    .dedicatoria {
+        font-size: 19px;
+    }
+}
